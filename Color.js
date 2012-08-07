@@ -1,21 +1,5 @@
 (function () {   
-    var util = {
-        toString: function (o) { return Object.prototype.toString.call(o); },
-        isArray:  function (o) { return this.toString(o) === '[object Array]'; },
-        isString: function (o) { return this.toString(o) === '[object String]'; },
-        map: function (arr, fn) {
-            for (var i = 0; i < arr.length; i++) {
-                arr[i] = fn(arr[i]);
-            }
-            return arr;
-        },
-        pad: function (str, length, padding) {
-            while (str.length < length) {
-                str = padding + str;
-            }
-            return str;
-        }
-    };
+    
 
     this.Color = function (color) {
         this.set(color);
@@ -36,11 +20,11 @@
         },
         getHex: function (withHash) {
             var rgb = this.getRgb();
-            return rgb === null ? null : ((withHash === true ? "#" : "") + Color.rgbToHex(rgb));
+            return rgb === null ? null : ((withHash === true ? "#" : "") + rgbToHex(rgb));
         },
         getHsv: function () {
             var rgb = this.getRgb();
-            return rgb === null ? null : Color.rgbToHsv(rgb);
+            return rgb === null ? null : rgbToHsv(rgb);
         },
         set: function (obj) {
             /*
@@ -52,29 +36,29 @@
             */
             if (obj && (obj.hsv || obj.rgb || obj.rgba || obj.hex)) {
                 if (obj.hsv) {
-                    this.rgba = Color.hsvToRgba(obj.hsv);
+                    this.rgba = hsvToRgba(obj.hsv);
                 } else if (obj.rgb) {
-                    this.rgba = Color.rgbToRgba(obj.rgb);
+                    this.rgba = rgbToRgba(obj.rgb);
                 } else if (obj.rgba) {
                     this.rgba = obj.rgba;
                 } else if (obj.hex) {
-                    this.rgba = Color.hexToRgba(obj.hex);
+                    this.rgba = hexToRgba(obj.hex);
                 }
-            } else if (util.isArray(obj)) {
+            } else if (isArray(obj)) {
                 // if obj is an array, we treat it as rgb or rgba
-                this.rgba = Color.rgbToRgba(obj);
-            } else if (util.isString(obj)) {
+                this.rgba = rgbToRgba(obj);
+            } else if (isString(obj)) {
                 // if obj is a string, we treat it as hex unless in the format rgb(#,#,#) or rgba(#,#,#,#)
                 if (obj[0] == "r") {
                     // this is an rgb(a) string
                     if (obj[3] != "a") {
-                        this.rgba = util.map(Color.rgbToRgba(obj.substring(4, obj.length - 1).split(",")), function (v) { return +v; });
+                        this.rgba = map(rgbToRgba(obj.substring(4, obj.length - 1).split(",")), function (v) { return +v; });
                     } else {
-                        this.rgba = util.map(obj.substring(5, obj.length - 1).split(","), function (v) { return +v; });
+                        this.rgba = map(obj.substring(5, obj.length - 1).split(","), function (v) { return +v; });
                     }
                 } else {
                     // this is a hex string
-                    this.rgba = Color.hexToRgba(obj);
+                    this.rgba = hexToRgba(obj);
                 }
             } else {
                 this.rgba = [255, 255, 255, 1.0]; // if nothing is specified, return white
@@ -84,7 +68,36 @@
     };
 
     // Color object methods
-    Color.hsvToRgba = function (hsv) {
+    Color.hsvToRgba = hsvToRgba;
+    Color.rgbToHsv = rgbToHsv;
+    Color.rgbToHex = rgbToHex;
+    Color.hexToRgba = hexToRgba;
+    Color.rgbaToRgb = rgbaToRgb;
+    Color.rgbToRgba = rgbToRgba;
+    Color.fixHex = fixHex;
+    
+    function toString(o) {
+        return Object.prototype.toString.call(o);
+    }
+    function isArray(o) {
+        return toString(o) === '[object Array]';
+    }
+    function isString(o) {
+        return toString(o) === '[object String]';
+    }
+    function map(arr, fn) {
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = fn(arr[i]);
+        }
+        return arr;
+    }
+    function pad(str, length, padding) {
+        while (str.length < length) {
+            str = padding + str;
+        }
+        return str;
+    }
+    function hsvToRgba(hsv) {
         var r, g, b,
             h = hsv[0],
             s = hsv[1],
@@ -105,8 +118,8 @@
         }
 
         return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255), 1];
-    };
-    Color.rgbToHsv = function (rgb) {
+    }
+    function rgbToHsv(rgb) {
         var r = rgb[0]/255,
             g = rgb[1]/255,
             b = rgb[2]/255,
@@ -129,33 +142,32 @@
         }
 
         return [h, s, v];
-    };
-    Color.rgbToHex = function(rgb) {
-        return util.pad(rgb[0].toString(16), 2, "0") + 
-               util.pad(rgb[1].toString(16), 2, "0") +
-               util.pad(rgb[2].toString(16), 2, "0");
-    };
-    Color.hexToRgba = function (hex) {
-        hex = this.fixHex(hex);
+    }
+    function rgbToHex(rgb) {
+        return pad(rgb[0].toString(16), 2, "0") + 
+               pad(rgb[1].toString(16), 2, "0") +
+               pad(rgb[2].toString(16), 2, "0");
+    }
+    function hexToRgba(hex) {
+        hex = fixHex(hex);
         return [parseInt(hex.substr(0, 2), 16), 
                 parseInt(hex.substr(2, 2), 16), 
                 parseInt(hex.substr(4, 2), 16)];
-    };
-    Color.rgbaToRgb = function (rgba) {
+    }
+    function rgbaToRgb(rgba) {
         rgba.pop();
         return rgba;
-    };
-    Color.rgbToRgba = function (rgb) {
+    }
+    function rgbToRgba(rgb) {
         if (rgb.length == 3) {
             rgb.push(1.0);
         }
         return rgb;
-    };
-    Color.fixHex = function (hex) {
+    }
+    function fixHex(hex) {
         hex = (hex[0] == "#" ? hex.substring(1) : hex); // remove # if it's there
 
         // if the length is 3 (e.g., ABA), return the 6 digit form (e.g., AABBAA)
         return hex.length == 3 ? (hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]) : hex;
-    };
-    
+    }
 }).call(this);

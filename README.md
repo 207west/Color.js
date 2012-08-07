@@ -5,23 +5,37 @@
 ####Color.hsvToRgba(hsv) &nbsp;&nbsp;&nbsp;&nbsp; `Color.hsvToRgba([0, 0, 1])`
 >Converts an _HSV array_ to an _RGBA array_.
 
+	var rgba = Color.hsvToRgba([0, 0, 1]); // [255, 255, 255, 1]
+
 ####Color.rgbToHsv(rgb) &nbsp;&nbsp;&nbsp;&nbsp; `Color.rgbToHsv([255, 255, 255])`
 >Converts an _RGB array_ to an _HSV array_.
+
+	var hsv = Color.rgbToHsv([255, 255, 255]); // [0, 0, 1]
 
 ####Color.rgbToHex(rgb) &nbsp;&nbsp;&nbsp;&nbsp; `Color.rgbToHex([255, 255, 255])`
 >Converts an _RGB array_ to a _Hex string without hash_.
 
+	var hex = Color.rgbToHex([255, 255, 255]); // 'ffffff'
+
 ####Color.hexToRgba(hex) &nbsp;&nbsp;&nbsp;&nbsp; `Color.hexToRgba('#fff')`
 >Converts a hex string to an _RGBA array_
+
+	var rgba = Color.hexToRgba('#fff'); // [255, 255, 255, 1]
 
 ####Color.rgbaToRgb(rgba) &nbsp;&nbsp;&nbsp;&nbsp; `Color.rgbaToRgb([255, 255, 255, 1])`
 >Converts an _RGBA array_ to an _RGB array_. (Basically just does a .pop() on the array and returns the array).
 
+	var rgba = Color.rgbaToRgb([255, 255, 255, 1]); // [255, 255, 255]
+
 ####Color.rgbToRgba(rgb) &nbsp;&nbsp;&nbsp;&nbsp; `Color.rgbToRgba([255, 255, 255])`
 >Converts an _RGB array_ to an _RGBA array_. (Basically just does a .push(1.0) on the array and returns the array).
 
+	var rgba = Color.rgbToRgba([255, 255, 255]); // [255, 255, 255, 1]
+
 ####Color.fixHex(hex) &nbsp;&nbsp;&nbsp;&nbsp; `Color.fixHex('333')`
->Converts any valid normal or shorthand, with or without hash, hex string into a _Hex string without hash_.
+>Converts any valid normal or shorthand hex string, with or without hash, into a _Hex string without hash_.
+
+	var hex = Color.fixHex('#fff'); // 'ffffff'
 
 ## Constructor
 #### Color([value]) &nbsp;&nbsp;&nbsp;&nbsp; `var myColor = new Color('#fff')`

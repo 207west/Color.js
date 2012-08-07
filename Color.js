@@ -1,9 +1,23 @@
-(function () {   
-    
+ /*!
+ * Color.js
+ * Javascript class for working with colors.
+ *
+ * by Adam Drago
+ */
 
+(function () {   
     this.Color = function (color) {
         this.set(color);
     };
+
+    // Color Static methods
+    Color.hsvToRgba = hsvToRgba;
+    Color.rgbToHsv = rgbToHsv;
+    Color.rgbToHex = rgbToHex;
+    Color.hexToRgba = hexToRgba;
+    Color.rgbaToRgb = rgbaToRgb;
+    Color.rgbToRgba = rgbToRgba;
+    Color.fixHex = fixHex;
 
     Color.prototype = {
         rgba: [],
@@ -67,15 +81,6 @@
         }
     };
 
-    // Color object methods
-    Color.hsvToRgba = hsvToRgba;
-    Color.rgbToHsv = rgbToHsv;
-    Color.rgbToHex = rgbToHex;
-    Color.hexToRgba = hexToRgba;
-    Color.rgbaToRgb = rgbaToRgb;
-    Color.rgbToRgba = rgbToRgba;
-    Color.fixHex = fixHex;
-    
     function toString(o) {
         return Object.prototype.toString.call(o);
     }
@@ -131,7 +136,7 @@
             s = max == 0 ? 0 : d / max;
 
         if(max == min){
-            h = 0; // achromatic
+            h = 0;
         }else{
             switch(max){
                 case r: h = (g - b) / d + (g < b ? 6 : 0); break;

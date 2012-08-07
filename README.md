@@ -1,5 +1,5 @@
 # Color.js
-### A JavaScript class for working with colors.
+### A JavaScript class for converting colors from/to RGB, RGBA, HSV, and Hex
 
 ## Constructor
 #### Color([value])

@@ -5,7 +5,7 @@
 #### Color([value])
 >Creates a new Color object based on the passed **value** parameter.
 
->**value** - Can be a string, an object, or an array representing a color. If **value** is not specificed, the produced Color will be white. 
+>**value** - Can be a string, an object, an array, or another Color object. If **value** is not specificed, the produced Color will be white. 
 
 	/* String */
 	new Color('rgb(255, 0, 0)'); 		// CSS-style RGB string
@@ -29,10 +29,18 @@
 ####.set([value])
 >Changes the Color object based on the passed **value** parameter and returns the new Color object.
 
->**value** - Can be a string, an object, or an array representing a color. If **value** is not specificed, the produced Color will be white.
+>**value** - Can be a string, an object, or an array, or another Color object. If **value** is not specificed, the produced Color will be white.
 
-	var myColor = new Color();
+	var myColor = new Color(),
+		myOtherColor = new Color();
+
 	myColor.set("#000");
+	myOtherColor.set(myColor);
+
+	/* OR */
+
+	var myColor = new Color("#000"),
+		myOtherColor = new Color(myColor);
 	
 ####.getRgb()
 >Returns the color as an _RGB array_.

@@ -1,0 +1,20 @@
+(function () {
+   window.color = new Color({ hex: "fff" });
+   console.log("white: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set("ffffff");
+   console.log("white: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set("rgb(255,0,0)");
+   console.log("red: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set("rgb(255,0,0, 0.5)");
+   console.log("half red: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set([0, 0, 0, 0.5]);
+   console.log("half black: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set([0,0,0]);
+   console.log("black: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set({ hsv: color.getHsv() });
+   console.log("black: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set({ rgb: color.getRgb() });
+   console.log("black: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color.set({ rgba: [0,255,0,0.5] });
+   console.log("half lime: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+})();

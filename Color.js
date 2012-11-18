@@ -75,7 +75,7 @@
                     this.rgba = hexToRgba(obj);
                 }
             } else {
-                this.rgba = [255, 255, 255, 1.0]; // if nothing is specified, return white
+                this.rgba = [0, 0, 0, 0]; // if nothing is specified, return transparent black
             }
             return this;
         }

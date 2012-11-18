@@ -17,4 +17,6 @@
    console.log("black: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
    color.set({ rgba: [0,255,0,0.5] });
    console.log("half lime: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
+   color = new Color();
+   console.log("parameterless instantiation: ", color.getHex(), color.getHsv(), color.getRgb(), color.getRgba());
 })();

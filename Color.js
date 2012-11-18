@@ -10,15 +10,6 @@
         this.set(color);
     };
 
-    // Color Static methods
-    Color.hsvToRgba = hsvToRgba;
-    Color.rgbToHsv = rgbToHsv;
-    Color.rgbToHex = rgbToHex;
-    Color.hexToRgba = hexToRgba;
-    Color.rgbaToRgb = rgbaToRgb;
-    Color.rgbToRgba = rgbToRgba;
-    Color.fixHex = fixHex;
-
     Color.prototype = {
         rgba: [],
         getRgb: function () {
@@ -176,4 +167,13 @@
             // if the length is 3 (e.g., ABA), return the 6 digit form (e.g., AABBAA)
             return hex.length == 3 ? (hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]) : hex;
         };
+
+    // Color Static methods
+    Color.hsvToRgba = hsvToRgba;
+    Color.rgbToHsv = rgbToHsv;
+    Color.rgbToHex = rgbToHex;
+    Color.hexToRgba = hexToRgba;
+    Color.rgbaToRgb = rgbaToRgb;
+    Color.rgbToRgba = rgbToRgba;
+    Color.fixHex = fixHex;
 }).call(this);

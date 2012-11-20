@@ -3,7 +3,6 @@
 	[
 		{
 			"path": "/",
-			"name": "ColorJS",
 			"file_exclude_patterns": ["*.git*", "*.sublime-workspace"]
 		}
 	]
